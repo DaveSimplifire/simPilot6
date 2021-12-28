@@ -1,6 +1,8 @@
+// import ReactDOM from 'react-dom';
 import * as React from "react";
 import { render } from "react-dom";
 import { simPilot6 } from "../../declarations/simPilot6";
+import DocumentPrompt from "./components/DocumentPrompt";
 
 const MyHello = () => {
   const [name, setName] = React.useState('');
@@ -13,13 +15,21 @@ const MyHello = () => {
 
   return (
     <div style={{ "fontSize": "20px" }}>
+      <div>
+        <DocumentPrompt></DocumentPrompt>
+      </div>
       <div style={{ "backgroundColor": "yellow" }}>
         <p>Greetings, from DFINITY!</p>
         <p>
           {" "}
-          Type your message in the Name input field, then click{" "}
+          Enter document name, then click{" "}
           <b> Get Greeting</b> to display the result.
         </p>
+
+    <p align="center">
+        <textarea id="myTextarea"></textarea>
+    </p>
+    
       </div>
       <div style={{ margin: "30px" }}>
         <input
@@ -37,6 +47,8 @@ const MyHello = () => {
   );
 };
 
+
+//ReactDOM.render(<App />, document.getElementById('root'));
 render(<MyHello />, document.getElementById("app"));
 
 // document.getElementById("clickMeBtn").addEventListener("click", async () => {
