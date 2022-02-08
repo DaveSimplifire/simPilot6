@@ -1,8 +1,11 @@
 // import ReactDOM from 'react-dom';
 import * as React from "react";
 import { render } from "react-dom";
+// import './index.css';
 import { simPilot6 } from "../../declarations/simPilot6";
 import DocumentPrompt from "./components/DocumentPrompt";
+import Header from "./components/Header";
+
 
 const MyHello = () => {
   const [name, setName] = React.useState('');
@@ -14,22 +17,22 @@ const MyHello = () => {
   }
 
   return (
-    <div style={{ "fontSize": "20px" }}>
+    <div>
       <div>
-        <DocumentPrompt></DocumentPrompt>
-      </div>
-      <div style={{ "backgroundColor": "yellow" }}>
-        <p>Greetings, from DFINITY!</p>
-        <p>
-          {" "}
-          Enter document name, then click{" "}
+        <div>
+          <div style={ containerStyle }>
+          <Header />
+          <p>Greetings, from DFINITY!</p>
+          <p>
+            {" "}
+            Enter document name, then click{" "}
           <b> Get Greeting</b> to display the result.
+          </p>
+          </div>
+          <p align="center">
+          <textarea id="myTextarea"></textarea>
         </p>
-
-    <p align="center">
-        <textarea id="myTextarea"></textarea>
-    </p>
-    
+        </div>
       </div>
       <div style={{ margin: "30px" }}>
         <input
@@ -47,6 +50,17 @@ const MyHello = () => {
   );
 };
 
+// CSS in JS
+const containerStyle = {
+  maxWidth: "500px",
+  margin: "30px auto",
+  minHeight: "300px",
+  boxSizing: "border-box",
+  padding: "30px",
+  margin: "30px auto",
+  border: "1px solid steelblue",
+  borderRadius: "5px"
+ }
 
 //ReactDOM.render(<App />, document.getElementById('root'));
 render(<MyHello />, document.getElementById("app"));
