@@ -18,13 +18,13 @@ const MyHello = () => {
     setMessage(greeting);
   }
 
-  const [showAddDoc, setShowAddDoc] = useState(true)
+  const [showAddDoc, setShowAddDoc] = useState(false)
 
   const [docs, setDocs] = useState([
     {
         id: 1,
         docName: "Employment Contract",
-        docText: "This employment agreement is made and effective as of 25th January,2020 by and between Employer and Employee",
+        docText: "This employment agreement is made and effective as of 25th January 2020 by and between Employer and Employee",
         date_created: "2022/01/03"        
     },
     {
@@ -59,8 +59,8 @@ const deleteDoc = (id) => {
       <div>
         <div>
           <div style={ containerStyle }>
-          <Header />
-          {showAddDoc && <AddDoc onAdd={addDoc}/>}
+          <Header onAdd={() => setShowAddDoc(!showAddDoc)} showAdd={showAddDoc} />
+          {showAddDoc && <AddDoc onAdd={addDoc} />}
           {docs.length > 0 ? (
             <Docs docs={docs} onDelete={deleteDoc} />
           ) : (
