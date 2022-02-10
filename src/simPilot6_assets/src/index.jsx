@@ -1,11 +1,13 @@
 // import ReactDOM from 'react-dom';
 import * as React from "react";
+import { useState } from 'react';
 import { render } from "react-dom";
 // import './index.css';
 import { simPilot6 } from "../../declarations/simPilot6";
 import DocumentPrompt from "./components/DocumentPrompt";
 import Header from "./components/Header";
-
+import Docs from "./components/Docs";
+import AddDoc from "./components/AddDoc";
 
 const MyHello = () => {
   const [name, setName] = React.useState('');
@@ -16,18 +18,59 @@ const MyHello = () => {
     setMessage(greeting);
   }
 
+  const [showAddDoc, setShowAddDoc] = useState(true)
+
+  const [docs, setDocs] = useState([
+    {
+        id: 1,
+        docName: "Employment Contract",
+        docText: "This employment agreement is made and effective as of 25th January,2020 by and between Employer and Employee",
+        date_created: "2022/01/03"        
+    },
+    {
+        id: 2,
+        docName: "Non Disclosure Agreement",
+        docText: "Text",
+        date_created: "2022/01/08" 
+    },
+    {
+        id: 3,
+        docName: "Purchase Order",
+        docText: "Text",
+        date_created: "2022/01/012" 
+    },
+  ])
+
+// Add Document
+const addDoc = (doc) => {
+  const id = Math.floor(Math.random() * 1000) + 1
+  const newDoc = { id, ...doc }
+  console.log(newDoc)
+  setDocs([...docs, newDoc])
+}
+
+// Delete Doc
+const deleteDoc = (id) => {
+  setDocs(docs.filter((doc) => doc.id !== id ))
+}
+
   return (
     <div>
       <div>
         <div>
           <div style={ containerStyle }>
           <Header />
-          <p>Greetings, from DFINITY!</p>
+          {showAddDoc && <AddDoc onAdd={addDoc}/>}
+          {docs.length > 0 ? (
+            <Docs docs={docs} onDelete={deleteDoc} />
+          ) : (
+            'No documents to show')}
+          {/* <p>Greetings, from DFINITY!</p>
           <p>
             {" "}
             Enter document name, then click{" "}
           <b> Get Greeting</b> to display the result.
-          </p>
+          </p> */}
           </div>
           <p align="center">
           <textarea id="myTextarea"></textarea>
@@ -54,12 +97,13 @@ const MyHello = () => {
 const containerStyle = {
   maxWidth: "500px",
   margin: "30px auto",
-  minHeight: "300px",
+  minHeight: "200px",
   boxSizing: "border-box",
   padding: "30px",
   margin: "30px auto",
   border: "1px solid steelblue",
-  borderRadius: "5px"
+  borderRadius: "10px",
+  fontSize: "15px"
  }
 
 //ReactDOM.render(<App />, document.getElementById('root'));
