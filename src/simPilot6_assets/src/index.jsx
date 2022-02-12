@@ -3,8 +3,8 @@ import * as React from "react";
 import { useState } from 'react';
 import { render } from "react-dom";
 // import './index.css';
-import { simPilot6 } from "../../declarations/simPilot6";
-import DocumentPrompt from "./components/DocumentPrompt";
+import { simPilot6 as canister } from "../../declarations/simPilot6";
+// import DocumentPrompt from "./components/DocumentPrompt";
 import Header from "./components/Header";
 import Docs from "./components/Docs";
 import AddDoc from "./components/AddDoc";
@@ -14,8 +14,13 @@ const MyHello = () => {
   const [message, setMessage] = React.useState('');
 
   async function doGreet() {
-    const greeting = await simPilot6.greet(name);
+    const greeting = await canister.greet(name);
     setMessage(greeting);
+  }
+
+  async function doDocs() {
+    const docStored = await canister.docs(docs[0].docName);
+    setMessage(docStored);
   }
 
   const [showAddDoc, setShowAddDoc] = useState(false)
@@ -65,18 +70,22 @@ const deleteDoc = (id) => {
             <Docs docs={docs} onDelete={deleteDoc} />
           ) : (
             'No documents to show')}
-          {/* <p>Greetings, from DFINITY!</p>
-          <p>
-            {" "}
-            Enter document name, then click{" "}
-          <b> Get Greeting</b> to display the result.
-          </p> */}
-          </div>
-          <p align="center">
+          </div>  
+      </div>
+
+      <div style={{ margin: "30px" }}>
+        <button onClick={doDocs}>Save document to Internet Computer</button>
+      </div>
+      <div>
+        <span style={{ color: "blue" }}>{message}</span>
+      </div>
+
+      <div>
+        </div><p align="center">
           <textarea id="myTextarea"></textarea>
         </p>
-        </div>
       </div>
+
       <div style={{ margin: "30px" }}>
         <input
           id="name"
@@ -85,6 +94,7 @@ const deleteDoc = (id) => {
         ></input>
         <button onClick={doGreet}>Get Greeting!</button>
       </div>
+
       <div>
         Greeting is: "
         <span style={{ color: "blue" }}>{message}</span>"

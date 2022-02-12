@@ -1,3 +1,4 @@
 service : {
+  docs: (text) -> (text);
   greet: (text) -> (text);
 }
