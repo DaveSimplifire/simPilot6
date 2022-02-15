@@ -42,7 +42,7 @@ const MyHello = () => {
         id: 3,
         docName: "Purchase Order",
         docText: "Text",
-        date_created: "2022/01/012" 
+        date_created: "2022/01/12" 
     },
   ])
 
@@ -74,11 +74,14 @@ const deleteDoc = (id) => {
       </div>
 
       <div style={{ margin: "30px" }}>
-        <button onClick={doDocs}>Save document to Internet Computer</button>
+        <button 
+          onClick={doDocs}>Save document to Internet Computer
+        </button>
       </div>
       <div>
-        <span style={{ color: "blue" }}>{message}</span>
+        <span style={{ margin: "30px", color: "blue" }}>{message}</span>
       </div>
+      <span></span>
 
       <div>
         </div><p align="center">
@@ -86,19 +89,6 @@ const deleteDoc = (id) => {
         </p>
       </div>
 
-      <div style={{ margin: "30px" }}>
-        <input
-          id="name"
-          value={name}
-          onChange={(ev) => setName(ev.target.value)}
-        ></input>
-        <button onClick={doGreet}>Get Greeting!</button>
-      </div>
-
-      <div>
-        Greeting is: "
-        <span style={{ color: "blue" }}>{message}</span>"
-      </div>
     </div>
   );
 };
@@ -147,3 +137,19 @@ render(<MyHello />, document.getElementById("app"));
 
 //   return false;
 // });
+
+{/* 
+  <div style={{ margin: "30px" }}>
+<input
+  id="name"
+  value={name}
+  onChange={(ev) => setName(ev.target.value)}
+></input>
+<button onClick={doGreet}>Get Greeting!</button>
+</div>
+
+<div>
+Greeting is: "
+<span style={{ color: "blue" }}>{message}</span>"
+</div> 
+*/}
